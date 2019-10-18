@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Button from '@hi-ui/hiui/es/button'
-
+import fetch from 'fetch'
 // hook 形式
 const effectDemo = () => {
   const [count, setCount] = useState(0)
@@ -9,7 +9,7 @@ const effectDemo = () => {
     // 可执行任何有副作用的代码，如：数据请求、日志操作等等
     // 模拟一个延时任务
     console.log('effect 执行')
-    fetch('https://easy-mock.com/mock/5c1b42e3fe5907404e6540e9/hiui/select/options?text=xiaomi').then((res) => {
+    fetch('n://easy-mock.com/mock/5c1b42e3fe5907404e6540e9/hiui/select/options?text=xiaomi').then((res) => {
       res.json().then((d) => {
         setData(d.data)
       })
@@ -26,7 +26,7 @@ const effectDemo = () => {
       <Button
         type='primary'
         onClick={() => {
-        setCount(count + 1)
+          setCount(count + 1)
         }}
       >
         Click
@@ -53,7 +53,7 @@ class ClassEffectDemo extends React.Component {
       })
     })
   }
-  render() {
+  render () {
     return <div>
       {
         this.state.data.map((m, n) => {

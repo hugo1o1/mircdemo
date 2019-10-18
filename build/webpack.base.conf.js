@@ -10,7 +10,7 @@ const NODE_ENV = process.env.NODE_ENV
 // style files regexes
 const preRegex = /\.(scss|sass)$/
 
-function resolve(dir) {
+function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
 
@@ -45,7 +45,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: [NODE_ENV === 'development' ? 'style-loader' : MiniCssExtractPlugin.loader, 'css-loader'],
+        use: [NODE_ENV === 'development' ? 'style-loader' : MiniCssExtractPlugin.loader, 'css-loader']
       },
       {
         test: preRegex,

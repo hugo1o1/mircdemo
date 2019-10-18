@@ -5,60 +5,50 @@ import Card from '@hi-ui/hiui/es/card'
 import './hugo.scss'
 import { store } from '../../store/index'
 
-
 const { Row, Col } = Grid
-const { getState, dispatch } = store
+const { getState } = store
 
-const Todo = (props) => {
+// const Todo = (props) => {
+//   return (
+//     <Card title={props.title}>
+//       <span>{props.description}</span>
+//     </Card>
+//   )
+// }
 
-  return (
-    <Card title={props.title}>
-      <span>{props.description}</span>
-    </Card>
-  )
-}
+// const TodoList = (props) => {
+//   props.forEach(currentItem => {
 
-const TodoList = (props) =>{
- props.forEach(currentItem => {
-   
- })
- 
-}
+//   })
+// }
 
 export default class HugoTodos extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = {
       ...getState()
     }
-
-
   }
 
-  componentDidMount() {
+  componentDidMount () {
     console.log(getState())
   }
 
-
-
-
-
-
-  render() {
+  render () {
     return (
-      <div className="mytodos">
+      <div className='mytodos'>
         <div>
-          <Row gutter={true}>
+          <Row gutter>
             <Col span={6}>
               <div style={{ backgroundColor: '#6edc7d', width: '100%', padding: '16px 0', textAlign: 'center', color: '#fff' }}>todos</div>
               <br />
 
               <br />
-              <Card title="标题">
+              <Card title='标题'>
                 <span>普通 Card</span>
               </Card>
               <br />
-              <Card title="标题">
+              <Card title='标题'>
                 <span>普通 Card</span>
               </Card>
             </Col>
@@ -75,5 +65,3 @@ export default class HugoTodos extends Component {
     )
   }
 }
-
-

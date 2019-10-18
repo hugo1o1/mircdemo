@@ -20,7 +20,7 @@ export default (state = initialState, action = {}) => {
     case UPDATE_TABLE_DATAS:
       const tableDatas = Object.assign({}, initialState.tableDatas, payload)
 
-      return Object.assign({}, state, {tableDatas})
+      return Object.assign({}, state, { tableDatas })
     default:
       return state
   }

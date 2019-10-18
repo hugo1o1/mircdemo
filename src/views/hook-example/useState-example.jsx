@@ -11,7 +11,7 @@ const stateDemo = () => {
       <Button
         type='primary'
         onClick={() => {
-        setCount(count + 1)
+          setCount(count + 1)
         }}
       >
         Click
@@ -28,7 +28,7 @@ class ClassStateDemo extends React.Component {
       count: 0
     }
   }
-  render() {
+  render () {
     return <div>
       <p>You clicked {this.state.count} times</p>
       <Button

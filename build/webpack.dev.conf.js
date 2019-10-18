@@ -42,6 +42,6 @@ module.exports = merge(baseWebpackConfig, {
   ]
 })
 
-function checkNodeVersion() {
+function checkNodeVersion () {
   return semver.gte(process.version, '10.3.0') ? [] : ['Node version less than 10.3.0: https://wiki.n.miui.com/pages/viewpage.action?pageId=141942386']
 }

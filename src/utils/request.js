@@ -3,7 +3,7 @@ import _ from 'lodash'
 import Cookies from 'js-cookie'
 import qs from 'qs'
 import Loading from '@hi-ui/hiui/es/loading'
-import {handleNotificate} from '@hi-ui/hiui/es/notification'
+import { handleNotificate } from '@hi-ui/hiui/es/notification'
 import config from '../config'
 
 let loadingInstance = null
@@ -31,20 +31,19 @@ const notificate = options => {
 }
 const allwaysTrue = () => true
 
-export const request = async(url, options={}, host=config('apiHost')) => {
-  
-  const { 
-    timeout=30000, 
-    loading=true, 
-    withCredentials=true,
-    catchError=true, // 是否捕获请求中的错误，并提示
-    beforeResponse=allwaysTrue, 
-    errorResponse=allwaysTrue, 
-    beforeRequest=allwaysTrue, 
-    errorRequest=allwaysTrue, 
-    errorCallback=allwaysTrue, 
-    params={},
-    ...restOptions 
+export const request = async (url, options = {}, host = config('apiHost')) => {
+  const {
+    timeout = 30000,
+    loading = true,
+    withCredentials = true,
+    catchError = true, // 是否捕获请求中的错误，并提示
+    beforeResponse = allwaysTrue,
+    errorResponse = allwaysTrue,
+    beforeRequest = allwaysTrue,
+    errorRequest = allwaysTrue,
+    errorCallback = allwaysTrue,
+    params = {},
+    ...restOptions
   } = options
 
   if (loading && !loadingInstance) {
@@ -53,16 +52,16 @@ export const request = async(url, options={}, host=config('apiHost')) => {
 
   restOptions.headers = Object.assign({ // 设置header，可放置一些验证相关的
     'content-type': 'application/x-www-form-urlencoded',
-    'userId': Cookies.get('userId')||'', // demo，可根据需求自定义或删除
+    'userId': Cookies.get('userId') || '', // demo，可根据需求自定义或删除
     'serviceToken': Cookies.get('serviceToken') || '' // demo，可根据需求自定义或删除
   }, restOptions.headers)
   if (!restOptions.method) {
     restOptions.method = 'post'
   }
-  if (restOptions.headers['content-type'].toLocaleLowerCase()==='application/x-www-form-urlencoded' && restOptions.data) {
+  if (restOptions.headers['content-type'].toLocaleLowerCase() === 'application/x-www-form-urlencoded' && restOptions.data) {
     restOptions.data = qs.stringify(restOptions.data)
   }
-  restOptions.params = Object.assign({  // 配置全站所有请求的公用参数
+  restOptions.params = Object.assign({ // 配置全站所有请求的公用参数
     siteId: 1 // demo，可根据需求自定义或删除
   }, params)
 
@@ -76,25 +75,25 @@ export const request = async(url, options={}, host=config('apiHost')) => {
 
     if (_.isFunction(beforeRequest)) {
       bool = beforeRequest(config)
-    } 
-    if (bool) {
-      // 
     }
-    
+    if (bool) {
+      //
+    }
+
     return config
-  }, function(error) {
+  }, function (error) {
     if (catchError) {
       let bool = !!errorRequest
 
       if (_.isFunction(errorRequest)) {
         bool = errorRequest(error)
-      } 
+      }
       if (bool) {
-        notificate({ message:'请求错误，请稍后重试' })
+        notificate({ message: '请求错误，请稍后重试' })
       // console.log('----error request', error)
       }
     }
-    
+
     return Promise.reject(error)
   })
 
@@ -103,13 +102,13 @@ export const request = async(url, options={}, host=config('apiHost')) => {
 
     if (_.isFunction(beforeResponse)) {
       bool = beforeResponse(response)
-    } 
-    if (bool) {
-      // 
     }
-    
+    if (bool) {
+      //
+    }
+
     return response
-  }, function(error) {
+  }, function (error) {
     if (catchError) {
       let bool = !!errorResponse
 
@@ -128,15 +127,15 @@ export const request = async(url, options={}, host=config('apiHost')) => {
         notificate({ message: msg })
       }
     }
-    
+
     return Promise.reject(error)
   })
 
   return _axios({
-    url: host+url,
+    url: host + url,
     ...restOptions
   }).then(response => {
-    if (loading) { 
+    if (loading) {
       closeLoading()
     }
 
@@ -150,17 +149,16 @@ export const request = async(url, options={}, host=config('apiHost')) => {
 
         if (_.isFunction(errorCallback)) {
           bool = errorCallback(ret)
-        } 
+        }
         if (bool) {
-
-          notificate({ message:ret.msg&&ret.msg.toString() })
+          notificate({ message: ret.msg && ret.msg.toString() })
         }
       }
     }
-    
+
     return ret
   }, error => {
-    if (loading) { 
+    if (loading) {
       closeLoading()
     }
     throw error

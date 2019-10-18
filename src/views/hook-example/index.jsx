@@ -1,16 +1,16 @@
 import React from 'react'
-import UseStateExample, {ClassStateDemo} from './useState-example'
+import UseStateExample, { ClassStateDemo } from './useState-example'
 
 import './index.scss'
 
 export default class HookExample extends React.Component {
-  render() {
+  render () {
     return <div className='example-container'>
       <h1>This is Hook Examples!!!</h1>
       <h3>Hook:</h3>
       <UseStateExample />
       <pre>
-      {`
+        {`
   const stateDemo = () => {
     const [count, setCount] = useState(0)
 

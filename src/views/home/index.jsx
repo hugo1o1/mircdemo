@@ -5,7 +5,7 @@ import './home.scss'
 const { Row, Col } = Grid
 
 class HomeSearch extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.data = [
       { content: '常用', id: '0' },
@@ -14,14 +14,14 @@ class HomeSearch extends Component {
     ]
   }
 
-  renderTab() {
+  renderTab () {
     let tabList = []
     for (let i = 0; i < 4; i++) {
       tabList.push(
         <Col key={i} span={6}>
-          <div className="tab-item">
-            <div className="tab-item__title">标题</div>
-            <p className="tab-item__detail">功能简介</p>
+          <div className='tab-item'>
+            <div className='tab-item__title'>标题</div>
+            <p className='tab-item__detail'>功能简介</p>
           </div>
         </Col>
       )
@@ -29,23 +29,23 @@ class HomeSearch extends Component {
     return tabList
   }
 
-  render() {
+  render () {
     return (
-      <div className="page page--search">
-        <div className="search-box">
-          <Row justify="center">
-            <h3 className="search-guide">Sologn引导文案</h3>
+      <div className='page page--search'>
+        <div className='search-box'>
+          <Row justify='center'>
+            <h3 className='search-guide'>Sologn引导文案</h3>
           </Row>
           <Row>
             <Col>
               <Input
                 style={{ width: '450px' }}
                 append={
-                  <Button type="primary">
-                    <Icon name="search" />
+                  <Button type='primary'>
+                    <Icon name='search' />
                   </Button>
                 }
-                placeholder="Search"
+                placeholder='Search'
               />
             </Col>
           </Row>
@@ -59,14 +59,14 @@ class HomeSearch extends Component {
             </Col>
           </Row>
         </div>
-        <div className="tab-box">
+        <div className='tab-box'>
           <Menu
-            placement="horizontal"
+            placement='horizontal'
             activeId={'0'}
             data={this.data}
           />
-          <div className="tab-content">
-            <Row gutter justify="space-between">
+          <div className='tab-content'>
+            <Row gutter justify='space-between'>
               {this.renderTab()}
             </Row>
           </div>

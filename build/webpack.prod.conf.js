@@ -46,7 +46,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     }]),
     new MiniCssExtractPlugin({
       filename: path.join(config.build.assetsSubDirectory, 'css/[name].[contenthash:8].css'),
-      chunkFilename: path.join(config.build.assetsSubDirectory, 'css/[name].[contenthash:8].chunk.css'),
+      chunkFilename: path.join(config.build.assetsSubDirectory, 'css/[name].[contenthash:8].chunk.css')
     }),
     new OptimizeCssAssetsPlugin(),
     new HtmlWebpackPlugin({
