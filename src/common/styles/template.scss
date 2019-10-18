@@ -1,0 +1,26 @@
+@import '@hi-ui/core-css/index.scss';
+
+.page {
+  &--gutter {
+    padding: $spacer-6;
+  }
+
+  &--gutter--horizontal {
+    padding-left: $spacer-6;
+    padding-right: $spacer-6;
+  }
+
+  &--gutter--vertical {
+    padding-top: $spacer-6;
+    padding-bottom: $spacer-6;
+  }
+
+  &--toolbar--fixed {
+    .block-filter__actions {
+      position: fixed;
+      top: $spacer-4;
+      right: $spacer-4;
+      z-index: 12;
+    }
+  }
+}
