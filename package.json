@@ -48,7 +48,7 @@
   "dependencies": {
     "@hi-ui/classic-theme": "~2.0.0-rc.6",
     "@hi-ui/hiui": "~2.0.5",
-    "fetch": "~1.1.0",
+    "node-fetch": "~2.6.0",
     "normalize.css": "~8.0.1",
     "react": "~16.8.2",
     "react-dom": "~16.8.2",

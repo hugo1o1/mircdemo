@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Button from '@hi-ui/hiui/es/button'
-import fetch from 'fetch'
+import fetch from 'node-fetch'
 // hook 形式
 const effectDemo = () => {
   const [count, setCount] = useState(0)
