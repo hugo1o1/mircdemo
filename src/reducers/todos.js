@@ -26,11 +26,13 @@ const initialState = {
 export default function Todos (state = initialState, action = {}) {
   switch (action.type) {
     case 'ADD_TODO':
-      return state.todos.concat(Object.assign({}, action.text, { id: action.id, state: action.state }))
+      const todo = Object.assign({}, action.text, { id: action.id, state: action.state })
+      const todos = state.todos.concat(todo)
+      return Object.assign({}, state, { todos })
 
     case 'DELETE_TODO': {
-      console.log('34345435435')
-      return state.todos.filter((e) => { return (e.id !== action.id) })
+      const todos = state.todos.filter((e) => { return (e.id !== action.id) })
+      return Object.assign({}, state, { todos })
     }
     case 'EDIT_TODO':
       return state.map((todo, index) =>

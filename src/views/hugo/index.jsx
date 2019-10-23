@@ -6,11 +6,11 @@ import { Button, Input, Form } from '@hi-ui/hiui'
 import Modal from '@hi-ui/hiui/es/modal'
 import './hugo.scss'
 import { store } from '../../store/index'
-import { deleteTodo } from '../../actions/todos'
-
+import { deleteTodo, addTodo } from '../../actions/todos'
+import { connect } from 'react-redux'
 const { Row, Col } = Grid
-const { getState } = store
 
+const actions = { deleteTodo, addTodo }
 const Todo = (props) => {
   props = props.todo || []
   return (
@@ -24,7 +24,8 @@ const Todo = (props) => {
 }
 
 const TodoList = (props) => {
-  props = props.todos || []
+  props = props.todos.todos || []
+
   let todoList = []
   for (let i = 0; i < props.length; i++) {
     todoList.push(
@@ -35,12 +36,12 @@ const TodoList = (props) => {
   return todoList
 }
 
-export default class HugoTodos extends Component {
+class HugoTodos extends Component {
   constructor () {
     super()
     this.form = React.createRef()
     this.state = {
-      ...getState(),
+
       modalVisible: false,
       form: {
         title: '',
@@ -60,7 +61,6 @@ export default class HugoTodos extends Component {
       }
 
     }
-    console.log(this)
   }
 
   modalCancle = () => this.setState({
@@ -76,22 +76,19 @@ export default class HugoTodos extends Component {
     })
   }
   handleAddSubmit = () => {
-    // store.dispatch(addTodo(this.state.form))
-    // this.state.todos.todos.push(this.state.form)
-    this.state.todos = {}
-    // this.setState({
-    //   modalVisible: false,
-    //   form:{
-    //     title:'',
-    //     description:''
-    //   }
-    // })
+    store.dispatch(addTodo(this.state.form))
+    this.setState({
+      modalVisible: false,
+      form: {
+        title: '',
+        description: ''
+      }
+    })
   }
 
   render () {
     const FormItem = Form.Item
     const { form } = this.state
-    console.log(store.getState(), this)
 
     return (
       <div className='mytodos'>
@@ -100,7 +97,7 @@ export default class HugoTodos extends Component {
           <Row gutter>
             <Col span={6}>
               <div style={{ backgroundColor: '#6edc7d', width: '100%', padding: '16px 0', textAlign: 'center', color: '#fff' }}>todos</div>
-              <TodoList todos={this.state.todos.todos} />
+              <TodoList todos={this.props.todos} />
             </Col>
             <Col span={6}>
               <div style={{ backgroundColor: '#e8a84f', width: '100%', padding: '16px 0', textAlign: 'center', color: '#fff' }}>doing</div>
@@ -139,3 +136,5 @@ export default class HugoTodos extends Component {
     )
   }
 }
+
+export default connect(state => state, actions)(HugoTodos)
