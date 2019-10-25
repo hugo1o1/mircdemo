@@ -14,17 +14,19 @@ const actions = { deleteTodo, addTodo }
 const Todo = (props) => {
   props = props.todo || []
   return (
-    <Card title={props.title}>
-      <span>{props.description}</span>
-      <br />
-      <Button type='line' icon='edit' />
-      <Button type='danger' icon='delete' onClick={() => store.dispatch(deleteTodo(props.id))} />
-    </Card>
+    <div id={props.id} draggable='true'>
+      <Card title={props.title} >
+        <span>{props.description}</span>
+        <br />
+        <Button type='line' icon='edit' />
+        <Button type='danger' icon='delete' onClick={() => store.dispatch(deleteTodo(props.id))} />
+      </Card>
+    </div>
   )
 }
 
 const TodoList = (props) => {
-  props = props.todos.todos || []
+  props = props.todos || []
 
   let todoList = []
   for (let i = 0; i < props.length; i++) {
@@ -62,6 +64,10 @@ class HugoTodos extends Component {
 
     }
   }
+  // componentDidMount(){
+  //   console.log( this.refs.dropArea);
+
+  // }
 
   modalCancle = () => this.setState({
     modalVisible: false,
@@ -85,25 +91,50 @@ class HugoTodos extends Component {
       }
     })
   }
+  onDropHandle = (e) => {
+    console.log('drap drop')
+    console.log(e)
+  }
 
   render () {
     const FormItem = Form.Item
     const { form } = this.state
+    const allTodos = this.props.todos.todos
+    let todos = []; let doings = []; let dones = []
+    allTodos.forEach((v) => {
+      switch (v.state) {
+        case 'todo':
+
+          todos.push(v)
+          break
+        case 'doing':
+
+          doings.push(v)
+          break
+
+        default:
+          dones.push(v)
+
+          break
+      }
+    })
 
     return (
-      <div className='mytodos'>
+      <div className='mytodos' onDrop={() => this.onDropHandle()}>
 
         <div>
           <Row gutter>
             <Col span={6}>
               <div style={{ backgroundColor: '#6edc7d', width: '100%', padding: '16px 0', textAlign: 'center', color: '#fff' }}>todos</div>
-              <TodoList todos={this.props.todos} />
+              <TodoList todos={todos} />
             </Col>
             <Col span={6}>
               <div style={{ backgroundColor: '#e8a84f', width: '100%', padding: '16px 0', textAlign: 'center', color: '#fff' }}>doing</div>
+              <TodoList todos={doings} />
             </Col>
             <Col span={6}>
               <div style={{ backgroundColor: '#b93e56', width: '100%', padding: '16px 0', textAlign: 'center', color: '#fff' }}>done</div>
+              <TodoList todos={dones} />
             </Col>
             <Col span={6}>
               <Button size='large' type='primary' icon='plus' onClick={() => this.setState({ modalVisible: true })} style={{ margin: '0 auto' }} >新建</Button>

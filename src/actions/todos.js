@@ -1,4 +1,4 @@
-let todosCounter = 0
+let todosCounter = 100
 export const addTodo = text => ({
   type: 'ADD_TODO',
   id: todosCounter++,
