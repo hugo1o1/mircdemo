@@ -34,6 +34,17 @@ export default function Todos (state = initialState, action = {}) {
       const todos = state.todos.filter((e) => { return (e.id !== action.id) })
       return Object.assign({}, state, { todos })
     }
+    case 'CHANGE_STATE': {
+      const n = Math.floor(action.x / window.innerWidth * 4)
+      if (n >= 3) return state
+
+      const states = ['todo', 'doing', 'done']
+      const todos = state.todos.slice(0)
+      todos.forEach(todo => {
+        if (todo.id === action.id) todo.state = states[n]
+      })
+      return Object.assign({}, state, { todos })
+    }
     case 'EDIT_TODO':
       return state.map((todo, index) =>
         action.index === index ? { text: todo.text, completed: !todo.completed }

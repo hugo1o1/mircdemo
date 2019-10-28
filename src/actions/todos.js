@@ -8,4 +8,10 @@ export const addTodo = text => ({
 export const deleteTodo = id => ({
   type: 'DELETE_TODO',
   id
+
+})
+export const changeState = (id, x) => ({
+  type: 'CHANGE_STATE',
+  id,
+  x
 })

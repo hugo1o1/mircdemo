@@ -19,7 +19,6 @@ export default (state = initialState, action = {}) => {
   switch (type) {
     case UPDATE_TABLE_DATAS:
       const tableDatas = Object.assign({}, initialState.tableDatas, payload)
-
       return Object.assign({}, state, { tableDatas })
     default:
       return state

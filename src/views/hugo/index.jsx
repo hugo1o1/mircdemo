@@ -2,21 +2,21 @@ import React, { Component } from 'react'
 import Grid from '@hi-ui/hiui/es/grid'
 import Card from '@hi-ui/hiui/es/card'
 import { Button, Input, Form } from '@hi-ui/hiui'
-
 import Modal from '@hi-ui/hiui/es/modal'
 import './hugo.scss'
 import { store } from '../../store/index'
-import { deleteTodo, addTodo } from '../../actions/todos'
+import { deleteTodo, addTodo, changeState } from '../../actions/todos'
 import { connect } from 'react-redux'
-const { Row, Col } = Grid
 
-const actions = { deleteTodo, addTodo }
+const { Row, Col } = Grid
+const actions = { deleteTodo, addTodo, changeState }
+
 const Todo = (props) => {
   props = props.todo || []
   return (
-    <div id={props.id} draggable='true'>
+    <div id={props.id} draggable='true' onDragEndCapture={(e) => store.dispatch(changeState(props.id, e.clientX))}>
       <Card title={props.title} >
-        <span>{props.description}</span>
+        <span >{props.description}</span>
         <br />
         <Button type='line' icon='edit' />
         <Button type='danger' icon='delete' onClick={() => store.dispatch(deleteTodo(props.id))} />
@@ -64,10 +64,6 @@ class HugoTodos extends Component {
 
     }
   }
-  // componentDidMount(){
-  //   console.log( this.refs.dropArea);
-
-  // }
 
   modalCancle = () => this.setState({
     modalVisible: false,
@@ -91,10 +87,14 @@ class HugoTodos extends Component {
       }
     })
   }
-  onDropHandle = (e) => {
-    console.log('drap drop')
-    console.log(e)
-  }
+  // onDragEnter = (e) => {
+  //  e.preventDefault()
+  // if(e.relatedTarget)
+  // console.log(e.relatedTarget.innerHTML);
+  // }
+  // handleDragStart =()=>{
+
+  // }
 
   render () {
     const FormItem = Form.Item
@@ -120,7 +120,8 @@ class HugoTodos extends Component {
     })
 
     return (
-      <div className='mytodos' onDrop={() => this.onDropHandle()}>
+      // <div className='mytodos' onDragEnter={(e) => this.onDragEnter(e)}  >
+      <div className='mytodos'>
 
         <div>
           <Row gutter>
@@ -147,7 +148,7 @@ class HugoTodos extends Component {
           visible={this.state.modalVisible}
           onCancel={() => this.modalCancle()}
           footer={[
-            <Button key={-1} type='primary' onClick={() => this.handleAddSubmit()}>添加</Button>
+            <Button key={-1} type='primary' onClick={this.handleAddSubmit}>添加</Button>
           ]}
         >
           <Form ref={this.form} model={form} rules={this.state.formRules} labelWidth='100' labelPlacement='right' showColon={false}>
@@ -163,6 +164,7 @@ class HugoTodos extends Component {
             </FormItem>
           </Form>
         </Modal>
+
       </div>
     )
   }

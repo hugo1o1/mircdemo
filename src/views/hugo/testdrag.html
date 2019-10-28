@@ -8,10 +8,10 @@
 .src {
     display: flex;
 }
-
+/* 
 .dropabled {
     flex: 1;
-}
+} */
 
 .txt {
     color: green;
@@ -26,8 +26,7 @@
 .target {
     width: 200px;
     height: 200px;
-    line-height: 200px;
-    text-align: center;
+  
     border: 1px solid gray;
     color: red;
 }
@@ -45,11 +44,13 @@
             <img class="img" id="tupian1" src="https://images.pexels.com/photos/1963076/pexels-photo-1963076.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" alt="图片1" />
             <img class="img" id="tupian2" src="https://images.pexels.com/photos/1727280/pexels-photo-1727280.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" alt="图片2" />
         </div>
-        <div id='target' class="dropabled target">Drop Here</div>
-    </div>
+        <div id='target' class="dropabled target">Drop Here <p draggable="true" style="widows: 201px;height:201px">test</p></div>
+    </div> 
+
     <script>
         var dragSrc = document.getElementById('txt')
         var target = document.getElementById('target')
+        
 
         dragSrc.ondragstart = handle_start
         dragSrc.ondrag = handle_drag
